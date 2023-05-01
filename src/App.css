@@ -2,7 +2,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ----- COLORS ----- */
+
+:root {
+  --primary: #181FD2;
+  --secondary: #3E45F8;
+  --light: #F9FAFD;
+  --white: #FFFFFF;
+  --opaqueWhite: rgba(255, 255, 255, 0.5);
+}
+
+.blue {
+  color: var(--secondary)
 }
 
 body {
@@ -10,7 +24,7 @@ body {
 
 button, .btn {
   padding: 10px 20px;
-  border-radius: 50px;
+  border-radius: 5px;
   outline: none;
   border: none;
   font-weight: bold;
@@ -32,22 +46,74 @@ button, .btn {
   transform: scale(0.97);
 }
 
+.btn--2 {
+  background: var(--light);
+  color: var(--secondary);
+
+}
+
 a {
   text-decoration: none;
+}
+
+/* PAGES */
+
+#home, #profile, #calendar, #schedule, #feedback__page, #careers__page, #planning {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: calc(100% - 100px);
+  padding-left: 200px;
+}
+
+.home__container, 
+.schedule__container, 
+.calendar__container, 
+.feedback__page--container, 
+.careers__page--container, 
+.planning__container {
+  padding: 20px;
+  width: 100%;
 }
 
 /* NAV */
 
 nav {
-  width: 100%;
-  background-color: #1e3c72;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: #181FD2;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nav__container {
-  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.nav__section {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: center; */
+  margin: 40px 0;
+  color: var(--opaqueWhite);
+  font-size: 18px;
+  transition: all 300ms ease;
+}
+
+.nav__section--icon {
+  margin-right: 20px;
+}
+
+.nav__section:hover {
+  color: var(--light);
 }
 
 .logo {
@@ -55,6 +121,7 @@ nav {
   opacity: 0.8;
   font-size: 30px;
   transition: all 300ms ease;
+  margin-bottom: 80px;
 }
 
 .logo:hover {
@@ -258,11 +325,168 @@ nav .fa-caret-down {
 /* HOME */
 
 .home__container {
-  padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.home__welcome {
-  color: #2b529a;
+.home__left {
+  width: 80%;
+}
+
+.home__right {
+  width: 20%;
+  margin-left: 20px;
+}
+
+.home__banner {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.home__banner--title {
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.home__banner--para {
+  font-style: italic;
+  opacity: 0.6;
+  max-width: 400px;
+}
+
+.home__banner--img {
+  width: 300px;
+}
+
+.home__account {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.home__search--icon, .home__notifications--icon {
+  margin-right: 15px;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.home__account--info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+}
+
+.home__account--name {
+  align-self: end;
+}
+
+.home__account--img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.home__calendar {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 355px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.react-calendar {
+  background-color: transparent !important;
+  border: none !important;
+  margin-bottom: 20px;
+}
+
+.home__events--title {
+  margin-bottom: 15px;
+}
+
+.home__events--wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  /* margin: 5px; */
+  margin-bottom: 15px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-left: 3px solid var(--secondary);
+}
+
+.home__event {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.home__notifications {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 355px;
+  margin-bottom: 20px;
+}
+
+.home__notifications--title {
+  margin-bottom: 10px;
+}
+
+.home__notifications--empty {
+  color: gray;
+}
+
+.home__messages {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 355px;
+  height: 330px;
+}
+
+.home__messages--title {
+  margin-bottom: 10px;
+}
+
+.home__messages--empty {
+  color: gray;
+}
+
+.home__career--card {
+  margin-top: 15px;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* background-color: var(--secondary); */
+  color: black;
+}
+
+.home__career--card--salary {
+  margin: 5px 0;
 }
 
 /* ---------- */
@@ -272,6 +496,7 @@ nav .fa-caret-down {
 #profile {
   position: relative;
   height: 100vh;
+  display: flex;
 }
 
 .profile__container {
@@ -328,6 +553,30 @@ input[type="file"] {
 .custom-file-upload {
   font-size: 14px;
   text-align: center;
+}
+
+.profile__events {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  padding: 20px;
+  border-left: 3px solid #2b529a7a;
+}
+
+.profile__events--title {
+  color: #2b529a;
+  font-size: 24px;
+}
+
+.profile__event h4 {
+  margin-top: 10px;
+  color: gray;
+  font-size: 22px;
+}
+
+.profile__event p {
+  color: black;
+  font-size: 16px;
 }
 
 /* ---------- */
@@ -557,6 +806,401 @@ background: linear-gradient(to right, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, F
 
 .chats__closer:hover {
   transform: scale(1.1);
+}
+
+/* ---------- */
+
+/* SCHEDULE */
+
+.schedule__title {
+  color: #2b529a;
+  padding: 20px;
+
+}
+
+.schedule__table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid lightgray;
+}
+
+th, td {
+  padding: 20px;
+  position: relative;
+}
+
+.schedule__courses--container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.schedule__courses--title {
+  color: #2b529a;
+}
+
+.schedule__courses--search {
+  width: 60%;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.schedule__courses--search--btn {
+  background-color: #3061e7;
+  color: white;
+}
+
+.schedule__courses--search--wrapper {
+  margin-bottom: 30px;
+}
+
+.schedule__courses--result {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin: 30px 0;
+  padding: 20px;
+}
+
+.schedule__courses--course--instructor--img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.course__block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: lightgreen;
+  color: black;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#schedule .btn--1 {
+  margin-top: 10px;
+}
+
+.schedule__remove--btn {
+  background: red;
+}
+
+/* ---------- */
+
+/* PLANNING */
+
+#planning h1 {
+  color: #2b529a;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+#planning table {
+  margin-left: 50px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#planning table tr:first-child th {
+  border-right: none;
+}
+
+#planning table button {
+  width: 100%;
+  border-radius: 0;
+  background-color: #3061e7;
+  color: white;
+}
+
+.planning__remove--btn {
+  background-color: red !important;
+}
+
+.add__modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 100px;
+  border-radius: 10px;
+  width: 80%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.add__modal h2 {
+  color: #2b529a;
+  margin-bottom: 20px;
+}
+
+.add__modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.add__modal button {
+  margin-top: 20px;
+}
+
+.searched__course {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.added__course {
+  transition: all 300ms ease;
+}
+
+.added__course:hover {
+  background-color: red;
+}
+
+/* ---------- */
+
+/* SEARCH COURSES */
+
+#search__courses {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary);
+  z-index: 999;
+}
+
+.search__courses--container {
+  width: 100%;
+  padding: 100px;
+  position: relative;
+}
+
+#search__courses .fa-x {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.search__courses--title {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.search__courses--input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.feedback__search--title {
+  margin-bottom: 10px;
+  color: #1e3c72;
+}
+
+.searched__course {
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  margin-bottom: 20px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
+}
+
+.searched__course--title {
+  color: #3061e7;
+  font-size: 20px;
+}
+
+.searched__course--instructor {
+  color: #3061e7;
+  font-size: 15px;
+}
+
+.searched__course--number {
+  color: #3061e7;
+  font-size: 15px;
+}
+
+#search__courses button {
+  margin: 0 !important;
+}
+
+/* ---------- */
+
+/* FEEDBACK PAGE */
+
+.feedback__page--container {
+  padding: 70px;
+}
+
+.feedback__page--title--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.feedback__header--title {
+  margin-bottom: 20px;
+}
+
+.feedback__comment {
+  font-size: 22px;
+}
+
+.feedback__workload, .feedback__attendance, .feedback__material {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating {
+  margin-left: 10px;
+  color: gold;
+}
+
+.feedback__card {
+  position: relative;
+  background-color: var(--light);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0 20px 0;
+}
+
+.feedback__comment {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.feedback__author {
+  margin-top: 10px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ---------- */
+
+/* ADD FEEDBACK */
+
+#add__feedback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #ededfa;
+  border-right: 1px solid #2a52983e;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  color: #1e3c72;
+}
+
+.feedback__form--group {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#add__feedback textarea {
+  width: 100%;
+  height: 100px;
+  border: 0.1px solid #1e3c72;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+}
+
+/* CALENDAR */
+
+/* calendar event */
+
+.calendar__container {
+  padding: 50px;
+  padding-left: 70px;
+}
+
+.calendar__container h1 {
+  color: var(--secondary);
+  margin-bottom: 20px;
+}
+
+.calendar_default_cornerright {
+  display: none;
+}
+
+/* ---------- */
+
+/* CAREERS PAGE */
+
+.careers__search {
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.careers__page--container {
+  padding: 50px 10px 50px 80px;
+}
+
+.careers__page--sub-title {
+  margin: 20px 0 20px 0;
+}
+
+.career__card {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+.career__card--title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.career__card button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 /* ---------- */

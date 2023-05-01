@@ -6,12 +6,19 @@ import HomePage from './pages/HomePage';
 import { auth, db } from './firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore';
-import Nav from './Nav';
+import Nav from './components/Nav';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import OtherProfilePage from './pages/OtherProfilePage';
 import MapPage from './pages/MapPage';
 import ChatsPage from './pages/ChatsPage';
+import SemesterSchedulePage from './pages/SemesterSchedulePage';
+import CoursePlanningPage from './pages/CoursePlanningPage';
+import Axios from 'axios';
+import CoursePage from './pages/CoursePage';
+import CalendarPage from './pages/CalendarPage';
+import CareersPage from './pages/CareersPage';
+import FeedbackSearchPage from './pages/FeedbackSearchPage';
 
 function App() {
 
@@ -20,17 +27,11 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-        // setLoading(false)
         if (user) {
           setUser(user) 
-          let currentState = await getUserById(user.uid)
-          setUserInfo(currentState)
-          // localStorage.setItem('mainUserInfo', [currentState.username, currentState.image])
-          // setDoc(doc(db, 'users', user.uid), {
-          //     ... currentState,
-          //     email: user.email,
-          //     lastOnline: new Date().toLocaleString().split(',')[0]
-          //   })
+          Axios.get(`http://localhost:3100/getUser/${user.uid}`).then(response => {
+            setUserInfo(response.data[0])
+          })
         }
       })
 }, [user]) 
@@ -51,6 +52,12 @@ async function getUserById(id) {
           {user && <Route path="/profile" element={<ProfilePage user={user} userInfo={userInfo} setUserInfo={setUserInfo}/>}/>}
           {user && <Route path="/profile/:name" element={<OtherProfilePage userInfo={userInfo} setUserInfo={setUserInfo}/>}/>}
           {user && <Route path="/map" element={<MapPage userInfo={userInfo}/>}/>}
+          {user && <Route path="/schedule" element={<SemesterSchedulePage userInfo={userInfo}/>}/>}
+          {user && <Route path="/planning" element={<CoursePlanningPage userInfo={userInfo}/>}/>}
+          {user && <Route path="/course/:courseNum" element={<CoursePage user={user} userInfo={userInfo}/>}/>}
+          {user && <Route path="/calendar" element={<CalendarPage user={user} userInfo={userInfo}/>}/>}
+          {user && <Route path="/careers" element={<CareersPage user={user} userInfo={userInfo}/>}/>}
+          {user && <Route path="/feedback" element={<FeedbackSearchPage user={user} userInfo={userInfo}/>}/>}
         </Routes>
       </div>
     </BrowserRouter>

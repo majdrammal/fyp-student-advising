@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { db } from '../firebase-config';
+import Axios from 'axios';
 
 const SearchUsers = ({ userInfo, setModal }) => {
 
@@ -9,19 +9,14 @@ const SearchUsers = ({ userInfo, setModal }) => {
     const [lastName, setLastName] = useState("")
     const [searchResult, setSearchResult] = useState([])
 
-    async function getUserByUsername() {
-        const userRef = query(
-            collection(db, "userCollection"),
-            where("firstName", "==", firstName),
-            where("lastName", "==", lastName)
-        )
-        const { docs } = await getDocs(userRef)
-        setSearchResult(docs.map(doc => doc.data()))
-        console.log(docs.map(doc => doc.data()))
+    function getUserByName() {
+        Axios.get(`http://localhost:3100/getUserByName/${firstName}/${lastName}`).then(response => {
+            setSearchResult(response.data)
+        }) 
     }
 
     function goToUser(user) {
-        localStorage.setItem("searchedEmail", user.email)
+        localStorage.setItem("searchedUser", user.userId)
         window.location.href = `/profile/${user.firstName + "-" + user.lastName}`
     }
 
@@ -32,7 +27,7 @@ const SearchUsers = ({ userInfo, setModal }) => {
                 <div className="search__users--inputs">
                     <input type="text" className="search__users--input" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)}/>
                     <input type="text" className="search__users--input" placeholder="Last Name" onChange={(event) => setLastName(event.target.value)}/>
-                    <FontAwesomeIcon icon="fa-search" className="search__users--icon" onClick={getUserByUsername}/>
+                    <FontAwesomeIcon icon="fa-search" className="search__users--icon" onClick={getUserByName}/>
                 </div>
                 <div className="search__users--res">
                     {

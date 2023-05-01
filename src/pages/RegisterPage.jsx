@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { auth, db } from '../firebase-config';
+import { auth } from '../firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-
+import Axios from 'axios';
 
 const RegisterPage = () => {
 
@@ -19,15 +18,16 @@ const RegisterPage = () => {
         if (firstName != "" && lastName != "" && email != "" && department != "") {
             createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                setDoc(doc(db, 'userCollection', userCredential.user.uid), {
+                Axios.post("http://localhost:3100/createUser", {
+                    userId: userCredential.user.uid,
                     email: email,
                     firstName: firstName,
                     lastName: lastName,
+                    major: department,
                     isAdvisor: document.getElementById("form__checkbox").checked,
-                    major: department, // for now
-                    profilePic: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+                    username: email.split("@")[0]
                 }).then(() => {
-                    // window.location.href = "/"
+                    window.location.href = "/"
                 })
             })
             .catch((err) => {

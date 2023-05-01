@@ -3,21 +3,11 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useState } from 'react';
 import Messages from '../components/Messages';
 import { db } from '../firebase-config';
-import Nav from '../Nav';
+import Nav from '../components/Nav';
 
 const ChatsPage = ({ user, userInfo, setOn }) => {
 
     const [chats, setChats] = useState([])
-
-    async function getChatByUserId() {
-        const userRef = query(
-            collection(db, "chats"),
-            where("firstUserId", "==", user.uid || "secondUserId", "==", user.uid),
-        )
-        const { docs } = await getDocs(userRef)
-        setChats(docs.map(doc => doc.data()))
-        // console.log(docs.map(doc => doc.data()))
-    }
 
     return (
         <div id="chats">

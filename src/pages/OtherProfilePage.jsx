@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../firebase-config';
-import Nav from '../Nav';
+import Nav from '../components/Nav';
+import Axios from 'axios';
 
 const OtherProfilePage = ({ userInfo }) => {
 
-    const {name} = useParams()
-
     const [searchUserInfo, setSearchedUserInfo] = useState(false)
 
-    async function getUserByUsername(email) {
-        const userRef = query(
-            collection(db, "userCollection"),
-            where("email", "==", email),
-            where("firstName", "==", name.split("-")[0])
-        )
-        const { docs } = await getDocs(userRef)
-        setSearchedUserInfo(docs.map(doc => doc.data())[0])
+    function getUserById(userId) {
+        Axios.get(`http://localhost:3100/getUserById/${userId}`).then(response => {
+            setSearchedUserInfo(response.data[0])
+        })
     }
 
     useEffect(() => {
-        getUserByUsername(localStorage.getItem("searchedEmail"))
+        getUserById(localStorage.getItem("searchedUser"))
     }, [])
-
-    console.log(searchUserInfo)
 
     return (
         <div id="profile">
